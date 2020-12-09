@@ -2,22 +2,22 @@ var express = require("express");
 
 var router = express.Router();
 
-// Import the model (cat.js) to use its database functions.
-var cat = require("../models/cat.js");
+// Import the model (burger.js) to use its database functions.
+var burger = require("../models/burger.js");
 
 router.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "public/index.html"));
 });
 
 // Create all our routes and set up logic within those routes where required.
-router.get("/cats", function(req, res) {
-  cat.all(function(data) {
-    res.json({ cats: data });
+router.get("/burgers", function(req, res) {
+  burger.all(function(data) {
+    res.json({ burgers: data });
   });
 });
 
-router.post("/cats", function(req, res) {
-  cat.create([
+router.post("/burgers", function(req, res) {
+  burger.create([
     "name", "sleepy"
   ], [
     req.body.name, req.body.sleepy
@@ -27,12 +27,12 @@ router.post("/cats", function(req, res) {
   });
 });
 
-router.put("/cats/:id", function(req, res) {
+router.put("/burgers/:id", function(req, res) {
   var condition = "id = " + req.params.id;
 
   console.log("condition", condition);
 
-  cat.update({
+  burger.update({
     sleepy: req.body.sleepy
   }, condition, function(result) {
     if (result.changedRows == 0) {
@@ -44,10 +44,10 @@ router.put("/cats/:id", function(req, res) {
   });
 });
 
-router.delete("/cats/:id", function(req, res) {
+router.delete("/burgers/:id", function(req, res) {
   var condition = "id = " + req.params.id;
 
-  cat.delete(condition, function(result) {
+  burger.delete(condition, function(result) {
     if (result.affectedRows == 0) {
       // If no rows were changed, then the ID must not exist, so 404
       return res.status(404).end();

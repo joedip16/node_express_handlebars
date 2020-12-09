@@ -1,26 +1,26 @@
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
 $(function() {
-  $.ajax("/cats", {
+  $.ajax("/burgers", {
     type: "GET"
   }).then(function(data) {
-    var sleepyElem = $("#sleepyCats");
-    var nosleepyElem = $("#notSleepyCats");
+    var sleepyElem = $("#sleepyBurgers");
+    var nosleepyElem = $("#notSleepyBurgers");
 
-    var cats = data.cats;
-    var len = cats.length;
+    var burgers = data.burgers;
+    var len = burgers.length;
 
     for (var i = 0; i < len; i++) {
       var new_elem =
         "<li>" +
-        cats[i].id + 
-        ". "+cats[i].name +
+        burgers[i].id + 
+        ". "+burgers[i].name +
         "<button class='change-sleep' data-id='" +
-        cats[i].id +
+        burgers[i].id +
         "' data-newsleep='" +
-        !cats[i].sleepy +
+        !burgers[i].sleepy +
         "'>";
 
-      if (cats[i].sleepy) {
+      if (burgers[i].sleepy) {
         new_elem += "SLEEP TIME!";
       } else {
         new_elem += "WAKE UP!";
@@ -29,11 +29,11 @@ $(function() {
       new_elem += "</button>";
 
       new_elem +=
-        "<button class='delete-cat' data-id='" +
-        cats[i].id +
+        "<button class='delete-burger' data-id='" +
+        burgers[i].id +
         "'>DELETE!</button></li>";
 
-      if (cats[i].sleepy) {
+      if (burgers[i].sleepy) {
         sleepyElem.append(new_elem);
       } else {
         nosleepyElem.append(new_elem);
@@ -50,7 +50,7 @@ $(function() {
     };
 
     // Send the PUT request.
-    $.ajax("/cats/" + id, {
+    $.ajax("/burgers/" + id, {
       type: "PUT",
       data: JSON.stringify(newSleepState),
       dataType:'json',
@@ -66,7 +66,7 @@ $(function() {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
 
-    var newCat = {
+    var newBurger = {
       name: $("#ca")
         .val()
         .trim(),
@@ -76,26 +76,26 @@ $(function() {
     };
 
     // Send the POST request.
-    $.ajax("/cats", {
+    $.ajax("/burgers", {
       type: "POST",
-      data: JSON.stringify(newCat),
+      data: JSON.stringify(newBurger),
       dataType:'json',
       contentType: 'application/json'
     }).then(function() {
-      console.log("created new cat");
+      console.log("created new burger");
       // Reload the page to get the updated list
       location.reload();
     });
   });
 
-  $(document).on("click", ".delete-cat", function(event) {
+  $(document).on("click", ".delete-burger", function(event) {
     var id = $(this).data("id");
 
     // Send the DELETE request.
-    $.ajax("/cats/" + id, {
+    $.ajax("/burgers/" + id, {
       type: "DELETE"
     }).then(function() {
-      console.log("deleted cat", id);
+      console.log("deleted burger", id);
       // Reload the page to get the updated list
       location.reload();
     });
