@@ -21,9 +21,9 @@ $(function() {
         "'>";
 
       if (burgers[i].sleepy) {
-        new_elem += "SLEEP TIME!";
+        new_elem += "Throw up";
       } else {
-        new_elem += "WAKE UP!";
+        new_elem += "EAT!";
       }
 
       new_elem += "</button>";
@@ -31,11 +31,12 @@ $(function() {
       new_elem +=
         "<button class='delete-burger' data-id='" +
         burgers[i].id +
-        "'>DELETE!</button></li>";
+        "'>Throw Out</button></li>";
 
       if (burgers[i].sleepy) {
         sleepyElem.append(new_elem);
-      } else {
+      } 
+      else {
         nosleepyElem.append(new_elem);
       }
     }
