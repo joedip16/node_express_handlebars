@@ -13,7 +13,7 @@ $(function() {
       var new_elem =
         "<li>" +
         burgers[i].id + 
-        ". "+burgers[i].name +
+        ". "+burgers[i].burger_name +
         "<button class='change-sleep' data-id='" +
         burgers[i].id +
         "' data-newsleep='" +

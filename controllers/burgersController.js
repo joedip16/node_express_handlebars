@@ -12,13 +12,15 @@ router.get("/", function(req, res) {
 // Create all our routes and set up logic within those routes where required.
 router.get("/burgers", function(req, res) {
   burger.all(function(data) {
+    console.log(data)
     res.json({ burgers: data });
   });
 });
 
 router.post("/burgers", function(req, res) {
+  console.log(req.body)
   burger.create([
-    "name", "sleepy"
+    "burger_name", "sleepy"
   ], [
     req.body.name, req.body.sleepy
   ], function(result) {
